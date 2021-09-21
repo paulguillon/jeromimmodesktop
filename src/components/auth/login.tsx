@@ -51,7 +51,7 @@ const Login: FunctionComponent<Props> = ({ updateToken }) => {
                 <form action="" onChange={handleChange} onSubmit={handleSubmit}>
                     <h1>Se connecter</h1>
                     {authorized === -1 && (
-                        <div role="alert" className="alert alert-danger">Mail ou mot de passe incorect</div>
+                        <div role="alert" className="alert alert-danger">Mail ou mot de passe incorrecte</div>
                     )
                     }
                     <div className="inputForm">
@@ -63,7 +63,6 @@ const Login: FunctionComponent<Props> = ({ updateToken }) => {
                     <button type="submit" className="center buttonForm">Connexion</button>
                 </form>
                 <a href="/" className="mt-4 text-decoration-underline">Mot de passe oublié ?  </a>
-                <a href="/register" className="mt-2 text-decoration-underline" >S'inscrire</a>
             </div >
         </div >
     )

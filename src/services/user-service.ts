@@ -13,18 +13,21 @@ export default class UserService {
       });
     return await resp.data;
   }
-  static async getRole(): Promise<string> {
-    const token: string = localStorage.token;
-    const user: User = jwt_decode(token);
+  static authorized(): number {
+    if (!localStorage.token)
+      return 0;
 
-    const resp = await axios
-      .get(`https://jeromimmo.fr/api/v1/users/${user.idUser}`, {
-        headers: {
-          Authorization: 'Bearer ' + token
-        }
-      });
-    const data = await resp.data;
-    return data.idRoleUser;
+    const token: string = localStorage.token;
+    try {
+      const user: any = jwt_decode(token);
+      //check that token is valid and role id is authorized
+      if (user.iat && user.idRoleUser && user.idUser && [1, 2, 3, 4].includes(user.idRoleUser))
+        return user.idRoleUser;
+    } catch (e) {
+      localStorage.removeItem('token');
+    }
+
+    return 0;
   }
 
   static async updateUser(token: string, user: User): Promise<User> {

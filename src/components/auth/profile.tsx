@@ -1,11 +1,9 @@
 import '../../assets/css/login.css';
 
-import { useEffect, useState } from 'react';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useEffect, useState } from 'react';
 import User from '../../models/user/user';
 import UserService from '../../services/user-service';
 import jwt_decode from "jwt-decode";
-import Loader from '../loader';
 
 const Profile: FunctionComponent = () => {
 
@@ -21,13 +19,13 @@ const Profile: FunctionComponent = () => {
     idRoleUser: 0,
     data: []
   });
-
+  
   const token: string = localStorage.token;
   const UserInfo: any = jwt_decode(token);
 
   useEffect(() => {
     UserService.getUser(token, UserInfo.idUser).then(data => setState(data))
-  }, [UserInfo.idUser, token])
+  }, [UserInfo.idUser, token]);
 
   const handleChange = (e: any) => {
     setState({ ...state, [e.target.name]: e.target.value })

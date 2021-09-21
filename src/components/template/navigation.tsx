@@ -8,6 +8,8 @@ type Props = {
 }
 
 const HeaderNavigation: FunctionComponent<Props> = ({ token }) => {
+  if (!token)
+    return null;
 
   return (
     <nav className="navbar navbar-expand-lg sticky-top">
@@ -30,21 +32,13 @@ const HeaderNavigation: FunctionComponent<Props> = ({ token }) => {
           <ul className="navbar-nav me-auto">
             <li><Link to="/properties">Biens</Link></li>
           </ul>
-
-          {token ? (
-            < ul className="navbar-nav d-flex justify-content-lg-end align-content-end">
-              <li><Link to="/profile">Profil</Link></li>
-              <li><Link to="/logout">Déconnexion</Link></li>
-            </ ul>
-          ) : (
-            <ul className="navbar-nav d-flex justify-content-lg-end align-content-end">
-              <li><Link to="/register">S'inscrire</Link></li>
-              <li><Link to="/login" >Connexion</Link></li>
-            </ul>
-          )}
+          < ul className="navbar-nav d-flex justify-content-lg-end align-content-end">
+            <li><Link to="/profile">Profil</Link></li>
+            <li><Link to="/logout">Déconnexion</Link></li>
+          </ ul>
         </div>
       </div>
-    </nav >
+    </nav>
   )
 }
 
