@@ -12,7 +12,7 @@ const Logout: FunctionComponent<Props> = ({ updateToken }) => {
     updateToken("")
     window.localStorage.removeItem("token");
 
-    history.push('/');
+    history.push('/login');
     return null;
 }
 export default Logout;

@@ -23,7 +23,7 @@ const Register = () => {
                     emailUser,
                     passwordUser,
                     passwordUser_confirmation,
-                    idRoleUser: 2,
+                    idRoleUser: 5,
                 })
             });
         const content = await response.json();

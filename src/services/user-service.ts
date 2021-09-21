@@ -1,7 +1,7 @@
 import User from "../models/user/user";
 import axios from "axios";
 import UserData from "../models/user/userData";
-
+import jwt_decode from "jwt-decode";
 export default class UserService {
 
   static async getUser(token: string, idUser: number): Promise<User> {
@@ -12,6 +12,19 @@ export default class UserService {
         }
       });
     return await resp.data;
+  }
+  static async getRole(): Promise<string> {
+    const token: string = localStorage.token;
+    const user: User = jwt_decode(token);
+
+    const resp = await axios
+      .get(`https://jeromimmo.fr/api/v1/users/${user.idUser}`, {
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+      });
+    const data = await resp.data;
+    return data.idRoleUser;
   }
 
   static async updateUser(token: string, user: User): Promise<User> {
@@ -43,14 +56,14 @@ export default class UserService {
   }
 
   static async getData(idUser: number, key: string, token: string): Promise<UserData> {
-      const promise = await axios({
-        method: 'GET',
-        url: `https://jeromimmo.fr/api/v1/users/${idUser}/data/${key}`,
-        headers: {
-          Authorization: 'Bearer ' + token,
-        }
-      });
-      const result = await promise.data;
-      return result.data;
+    const promise = await axios({
+      method: 'GET',
+      url: `https://jeromimmo.fr/api/v1/users/${idUser}/data/${key}`,
+      headers: {
+        Authorization: 'Bearer ' + token,
+      }
+    });
+    const result = await promise.data;
+    return result.data;
   }
 }

@@ -5,6 +5,7 @@ import PropertyFilter from "../../components/property/property-filter";
 import TypeProperties from "../../models/property/properties";
 import PropertyService from "../../services/property-service";
 import Pagination from "../../components/pagination";
+import UserService from "../../services/user-service";
 
 type Filters = {
   type: string;
@@ -18,7 +19,7 @@ type Filters = {
 
 const Properties: FunctionComponent = () => {
   const perPage = 10;
-  
+
   const [properties, setProperties] = useState<TypeProperties>({ total: 0, properties: [] });
   const [currentPage, setCurrentPage] = useState(1);
   const [offset, setOffset] = useState(0);
@@ -31,7 +32,6 @@ const Properties: FunctionComponent = () => {
     limit: perPage.toString(),
     offset: ""
   });
-
 
   useEffect(() => {
     PropertyService.getProperties(filters.type, filters.min, filters.max, filters.zipCode, filters.tags, perPage.toString(), offset.toString()).then((properties) =>
@@ -60,7 +60,7 @@ const Properties: FunctionComponent = () => {
       <PropertyFilter updateFilters={updateFilters} />
       <PropertyList data={properties} title="Liste des biens" />
       <Pagination perPage={perPage} data={properties} currentPage={currentPage} paginate={paginate} />
-    </div>
+    </div >
   );
 };
 

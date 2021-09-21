@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom';
 import { FunctionComponent } from 'react';
 import jwt_decode from "jwt-decode";
 
-
 type Props = {
     updateToken: Function
 }
@@ -14,6 +13,8 @@ const Login: FunctionComponent<Props> = ({ updateToken }) => {
 
     const [user, setUser] = useState({});
     const history = useHistory();
+    const [authorized, setAuthorized] = useState<number>(0);
+    
 
     const handleChange = (e: any) => {
         setUser({ ...user, [e.target.name]: e.target.value })
@@ -23,15 +24,18 @@ const Login: FunctionComponent<Props> = ({ updateToken }) => {
         e.preventDefault();
         axios.post("https://jeromimmo.fr/api/v1/login", user)
             .then(data => {
-                localStorage.setItem('token', data.data.token);
                 if (data.data.status === "success" && data.data.token_type === "bearer") {
+                    const token: string = data.data.token;
+                    const role: any = jwt_decode(token);
+
+                    if (![1, 2, 3, 4].includes(role.idRoleUser)) {
+                        setAuthorized(-1);
+                        return;
+                    }
+                    setAuthorized(1);
 
                     localStorage.token = data.data.token;
                     updateToken(data.data.token);
-
-                    let token = data.data.token;
-                    let UserInfo: any = jwt_decode(token);
-
                     history.push("/profile");
                 }
                 if (data.data.message === "Unauthorized") {
@@ -46,6 +50,10 @@ const Login: FunctionComponent<Props> = ({ updateToken }) => {
             <div className="w-100 d-flex flex-column justify-content-between ">
                 <form action="" onChange={handleChange} onSubmit={handleSubmit}>
                     <h1>Se connecter</h1>
+                    {authorized === -1 && (
+                        <div role="alert" className="alert alert-danger">Mail ou mot de passe incorect</div>
+                    )
+                    }
                     <div className="inputForm">
                         <input type="email" name="emailUser" placeholder="E-mail" ></input>
                     </div>
