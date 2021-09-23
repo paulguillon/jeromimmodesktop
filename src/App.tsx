@@ -1,5 +1,5 @@
 import { FunctionComponent, useState } from "react";
-import { BrowserRouter as Router, Switch, Route, useHistory, Redirect } from "react-router-dom";
+import { HashRouter, Switch, Route, useHistory, Redirect } from "react-router-dom";
 import Properties from "./pages/property/properties";
 import PropertyDetail from "./pages/property/property-detail";
 
@@ -23,8 +23,9 @@ const App: FunctionComponent = () => {
   const updateToken = (token: string) => {
     setToken(token);
   }
+  const role = UserService.authorized();
 
-  if (UserService.authorized()) {
+  if (role !== 0) {
     const UserInfo: any = jwt_decode(token);
 
     //deconnexion automatique après 24 heures
@@ -35,9 +36,9 @@ const App: FunctionComponent = () => {
       history.push("/logout");
     }
   }
-  const role = UserService.authorized();
+
   return (
-    <Router>
+    <HashRouter>
       <HeaderNavigation token={token} />
       <Switch>
         {role !== 0 &&
@@ -58,7 +59,7 @@ const App: FunctionComponent = () => {
         <Redirect to='/login' />
         <Route path="*" component={NotFound} />
       </Switch>
-    </Router>
+    </HashRouter>
   );
 };
 
