@@ -7,6 +7,8 @@ import jwt_decode from "jwt-decode";
 
 const Profile: FunctionComponent = () => {
 
+  const [updated, setUpdated] = useState<boolean>(false);
+
   const [state, setState] = useState<User>({
     idUser: 0,
     lastnameUser: '',
@@ -19,13 +21,15 @@ const Profile: FunctionComponent = () => {
     idRoleUser: 0,
     data: []
   });
-  
+
   const token: string = localStorage.token;
   const UserInfo: any = jwt_decode(token);
 
   useEffect(() => {
-    UserService.getUser(token, UserInfo.idUser).then(data => setState(data))
-  }, [UserInfo.idUser, token]);
+    if (!updated)
+      UserService.getUser(token, UserInfo.idUser).then(data => setState(data))
+    setUpdated(false);
+  }, [UserInfo.idUser, token, updated]);
 
   const handleChange = (e: any) => {
     setState({ ...state, [e.target.name]: e.target.value })
@@ -37,7 +41,7 @@ const Profile: FunctionComponent = () => {
     e.target.forEach((input: HTMLInputElement) => {
       setState({ ...state, [input.name]: input.value })
     });
-
+    setUpdated(true);
     UserService.updateUser(token, state).then(resp => setState(resp));
   };
 

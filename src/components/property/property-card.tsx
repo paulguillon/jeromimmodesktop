@@ -12,7 +12,6 @@ type Props = {
 }
 const PropertyCard: FunctionComponent<Props> = ({ property }) => {
   const [allData, setAllData] = useState<Array<PropertyData> | null>(null);
-  const [favorite, setFavorite] = useState<string>("");
 
   const token = localStorage.token;
   const UserInfo: any = token ? jwt_decode(token) : "";
@@ -28,7 +27,7 @@ const PropertyCard: FunctionComponent<Props> = ({ property }) => {
         {
           tags?.slice(0, 6).map(
             (tag) => (
-              <span style={{ backgroundColor: '#495464', padding: ".2rem 1rem", fontSize: "12px", margin: "0.2rem" }} className="text-white rounded-pill d-inline-flex mb-2">{tag.keyPropertyData}</span>
+              <span key={tag.keyPropertyData} style={{ backgroundColor: '#495464', padding: ".2rem 1rem", fontSize: "12px", margin: "0.2rem" }} className="text-white rounded-pill d-inline-flex mb-2">{tag.keyPropertyData}</span>
             )
           )
         }
