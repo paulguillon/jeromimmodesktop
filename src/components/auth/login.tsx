@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { FunctionComponent } from 'react';
 import jwt_decode from "jwt-decode";
+import UserService from '../../services/user-service';
 
 type Props = {
     updateToken: Function
@@ -14,7 +15,9 @@ const Login: FunctionComponent<Props> = ({ updateToken }) => {
     const [user, setUser] = useState({});
     const history = useHistory();
     const [authorized, setAuthorized] = useState<number>(0);
-    
+
+    if (UserService.authorized() !== 0)
+        history.push('/profile');
 
     const handleChange = (e: any) => {
         setUser({ ...user, [e.target.name]: e.target.value })

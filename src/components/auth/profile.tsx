@@ -42,7 +42,7 @@ const Profile: FunctionComponent = () => {
       setState({ ...state, [input.name]: input.value })
     });
     setUpdated(true);
-    UserService.updateUser(token, state).then(resp => setState(resp));
+    UserService.updateUser(token, UserInfo.idUser, state).then(resp => setState(resp.user));
   };
 
   return (

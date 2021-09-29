@@ -10,6 +10,9 @@ import Login from "./components/auth/login";
 import Logout from './components/auth/logout';
 import Register from "./components/auth/register";
 import Profile from "./components/auth/profile";
+import Admin from "./pages/auth/admin";
+import AddUser from "./components/admin/add-user";
+import EditUser from "./components/admin/edit-user";
 import NotFound from "./pages/page-not-found";
 
 import jwt_decode from "jwt-decode";
@@ -45,6 +48,9 @@ const App: FunctionComponent = () => {
           <>
             <Route exact path="/register" component={Register} />
             <Route exact path="/profile" component={Profile} />
+            <Route exact path="/admin" component={Admin} />
+            <Route exact path="/admin/user" component={AddUser} />
+            <Route exact path="/admin/user/:idUser" component={EditUser} />
             <Route exact path="/logout">
               <Logout updateToken={updateToken} />
             </Route>

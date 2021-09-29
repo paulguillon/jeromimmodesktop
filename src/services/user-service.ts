@@ -4,6 +4,15 @@ import UserData from "../models/user/userData";
 import jwt_decode from "jwt-decode";
 export default class UserService {
 
+  static async getAllUsers(token: string): Promise<Array<User>> {
+    const resp = await axios
+      .get(`https://jeromimmo.fr/api/v1/users`, {
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+      });
+    return await resp.data;
+  }
   static async getUser(token: string, idUser: number): Promise<User> {
     const resp = await axios
       .get(`https://jeromimmo.fr/api/v1/users/${idUser}`, {
@@ -30,17 +39,36 @@ export default class UserService {
     return 0;
   }
 
-  static async updateUser(token: string, user: User): Promise<User> {
+  static async updateUser(token: string, idUser: number, user: object): Promise<{ user: User, message: String, status: string }> {
     const resp = await axios({
       method: 'PATCH',
-      url: `https://jeromimmo.fr/api/v1/users/${user.idUser}`,
+      url: `https://jeromimmo.fr/api/v1/users/${idUser}`,
       headers: {
         Authorization: 'Bearer ' + token,
       },
-      data: {
-        firstnameUser: user.firstnameUser,
-        lastnameUser: user.lastnameUser,
-        emailUser: user.emailUser,
+      data: user
+    });
+    return await resp.data;
+  }
+
+  static async addUser(token: string, user: any): Promise<User> {
+    const resp = await axios({
+      method: 'POST',
+      url: `https://jeromimmo.fr/api/v1/users`,
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+      data: user
+    });
+    return await resp.data;
+  }
+
+  static async deleteUser(token: string, idUser: number): Promise<User> {
+    const resp = await axios({
+      method: 'DELETE',
+      url: `https://jeromimmo.fr/api/v1/users/${idUser}`,
+      headers: {
+        Authorization: 'Bearer ' + token,
       }
     });
     return await resp.data;

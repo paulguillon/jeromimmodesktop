@@ -33,6 +33,7 @@ const HeaderNavigation: FunctionComponent<Props> = ({ token }) => {
             <li><Link to="/properties">Biens</Link></li>
           </ul>
           < ul className="navbar-nav d-flex justify-content-lg-end align-content-end">
+            <li><Link to="/admin">Administration</Link></li>
             <li><Link to="/profile">Profil</Link></li>
             <li><Link to="/logout">Déconnexion</Link></li>
           </ ul>
