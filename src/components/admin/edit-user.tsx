@@ -73,7 +73,7 @@ const EditUser: FunctionComponent<RouteComponentProps<Params>> = ({ match }) => 
   }
 
   return (
-    <div className="m-auto w-75 container-form">
+    <div className="m-auto w-50 container-form">
       <div className="w-100 d-flex flex-column justify-content-start ">
         <Btn texte="Retour" go={-1} />
         <h1>Modifier utilisateur</h1>

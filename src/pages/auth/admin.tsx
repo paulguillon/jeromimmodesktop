@@ -38,7 +38,7 @@ const Admin: FunctionComponent = () => {
   }
 
   return (
-    <div className="m-auto w-75 container-form">
+    <div className="m-auto w-50 container-form">
       <div className="w-100 d-flex flex-column justify-content-start ">
         <h1>Administration</h1>
         <Btn texte="Ajouter un utilisateur" push="/admin/user" />

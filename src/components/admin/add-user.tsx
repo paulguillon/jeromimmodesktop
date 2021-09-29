@@ -43,7 +43,7 @@ const AddUser: FunctionComponent = () => {
   }
 
   return (
-    <div className="m-auto w-75 container-form">
+    <div className="m-auto w-50 container-form">
       <div className="w-100 d-flex flex-column justify-content-start ">
         <Btn texte="Retour" go={-1} />
         <h1>Nouvel utilisateur</h1>
@@ -63,7 +63,7 @@ const AddUser: FunctionComponent = () => {
             <option value="4">Agent</option>
             <option value="5">Client</option>
           </select>
-          
+
           <input type="password" name="passwordUser" placeholder="Mot de passe" />
           <input type="password" name="passwordUser_confirmation" placeholder="Confirmation du mot de passe" />
 
