@@ -46,20 +46,21 @@ const Profile: FunctionComponent = () => {
   };
 
   return (
-    <div className="m-auto w-75 container-form">
+    <div className="m-auto w-auto m-auto w-50 container-form mt-5 mb-5">
       <div className="w-100 d-flex flex-column justify-content-start ">
-        <h1>Profil</h1>
+        <div className="mt-2 mb-2">
+          <h1>Profil</h1>
+        </div>
         <form action="" onChange={handleChange} onSubmit={handleSubmit}>
-          <h2>Mes informations</h2>
-          <div className="w-25">
+          <div className="w-100 d-flex flex-column">
             <label>Nom
-              <input type="text" name="lastnameUser" defaultValue={state.lastnameUser} />
+              <input className="bg-white w-100" type="text" name="lastnameUser" defaultValue={state.lastnameUser} />
             </label>
             <label>Prénom
-              <input type="text" name="firstnameUser" defaultValue={state.firstnameUser} />
+              <input className="bg-white w-100" type="text" name="firstnameUser" defaultValue={state.firstnameUser} />
             </label>
             <label>Mail
-              <input type="email" name="emailUser" defaultValue={state.emailUser} />
+              <input className="bg-white w-100" type="email" name="emailUser" defaultValue={state.emailUser} />
             </label>
             <button type="submit" className="center buttonForm">Modifier</button>
           </div>

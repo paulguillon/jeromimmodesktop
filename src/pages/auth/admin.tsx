@@ -26,8 +26,8 @@ const Admin: FunctionComponent = () => {
         <td>{user.lastnameUser}</td>
         <td>{user.firstnameUser}</td>
         <td>{user.emailUser}</td>
-        <td><Link to={'admin/user/' + user.idUser}><i className="fas fa-edit"></i></Link></td>
-        <td><i className="fas fa-trash-alt red-text" onClick={() => deleteUser(user.idUser)}></i></td>
+        <td className="text-center"><Link to={'admin/user/' + user.idUser}><i className="fas fa-edit"></i></Link></td>
+        <td className="text-center"><i className="fas fa-trash-alt red-text" onClick={() => deleteUser(user.idUser)}></i></td>
       </tr>
     );
   }
@@ -38,10 +38,12 @@ const Admin: FunctionComponent = () => {
   }
 
   return (
-    <div className="m-auto w-50 container-form">
+    <div className="m-auto w-50 container-form mt-5 mb-5">
       <div className="w-100 d-flex flex-column justify-content-start ">
         <h1>Administration</h1>
-        <Btn texte="Ajouter un utilisateur" push="/admin/user" />
+        <div className="m-1 d-flex justify-content-end">
+          <Btn texte="Ajouter un utilisateur" push="/admin/user" />
+        </div>
         {users ? (
           users.length > 0 ? (
             <table>
@@ -51,8 +53,8 @@ const Admin: FunctionComponent = () => {
                   <th>Nom</th>
                   <th>Prénom</th>
                   <th>Mail</th>
-                  <th>Modifier</th>
-                  <th>Supprimer</th>
+                  <th  className="text-center">Modifier</th>
+                  <th  className="text-center">Supprimer</th>
                 </tr>
               </thead>
               <tbody>

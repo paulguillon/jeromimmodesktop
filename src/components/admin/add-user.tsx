@@ -45,17 +45,28 @@ const AddUser: FunctionComponent = () => {
   return (
     <div className="m-auto w-50 container-form">
       <div className="w-100 d-flex flex-column justify-content-start ">
-        <Btn texte="Retour" go={-1} />
-        <h1>Nouvel utilisateur</h1>
+        <div className="mb-2">
+          <Btn texte="Retour" go={-1} />
+        </div>
+
+        <h1 className="mb-3">Nouvel utilisateur</h1>
         {alert &&
           <div role="alert" className="alert alert-danger" onClick={() => setAlert('')}>{alert}</div>
         }
         <form action="" onChange={handleChange} onSubmit={handleSubmit}>
-          <input type="text" name="lastnameUser" placeholder="Nom" />
-          <input type="text" name="firstnameUser" placeholder="Prénom" />
-          <input type="email" name="emailUser" placeholder="E-mail" />
+          <input className="bg-white" type="text" name="lastnameUser" placeholder="Nom" />
+          <input className="bg-white" type="text" name="firstnameUser" placeholder="Prénom" />
+          <input className="bg-white" type="email" name="emailUser" placeholder="E-mail" />
 
-          <select className="browser-default custom-select" name="idRoleUser">
+          <div className="mt-3">
+            <input className="bg-white" type="password" name="passwordUser" placeholder="Mot de passe" />
+            <input className="bg-white" type="password" name="passwordUser_confirmation" placeholder="Confirmation du mot de passe" />
+
+            <input type="hidden" name="created_by" defaultValue={UserInfo.idUser} />
+            <input type="hidden" name="updated_by" defaultValue={UserInfo.idUser} />
+          </div>
+
+          <select className="browser-default custom-select mt-3" name="idRoleUser">
             <option hidden>Choisissez un rôle</option>
             <option value="1">Admin</option>
             <option value="2">Développeur</option>
@@ -63,12 +74,6 @@ const AddUser: FunctionComponent = () => {
             <option value="4">Agent</option>
             <option value="5">Client</option>
           </select>
-
-          <input type="password" name="passwordUser" placeholder="Mot de passe" />
-          <input type="password" name="passwordUser_confirmation" placeholder="Confirmation du mot de passe" />
-
-          <input type="hidden" name="created_by" defaultValue={UserInfo.idUser} />
-          <input type="hidden" name="updated_by" defaultValue={UserInfo.idUser} />
 
           <button type="submit" className="center buttonForm">Ajouter</button>
         </form>
